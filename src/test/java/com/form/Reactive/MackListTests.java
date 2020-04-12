@@ -88,7 +88,7 @@ public class MackListTests {
         System.out.println(sampleList.size());
         when(sampleList.size()).thenReturn(5);
         System.out.println(sampleList.size());
-       assertEquals(5,5);
+       assertEquals(sampleList.size(),5);
 
     }
 }
