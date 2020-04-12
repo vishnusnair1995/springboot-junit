@@ -13,7 +13,7 @@ import java.util.concurrent.Executor;
 public class ReactiveApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ReactiveApplication.class, args).close();;
+		SpringApplication.run(ReactiveApplication.class, args);;
 	}
 	@Bean
 	public Executor taskExecutor() {
