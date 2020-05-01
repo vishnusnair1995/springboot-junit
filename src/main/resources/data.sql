@@ -1,0 +1,1 @@
+insert into item values('6','cpu','1000',2);

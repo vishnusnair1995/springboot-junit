@@ -1,6 +1,13 @@
 package com.form.Reactive.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity
 public class Item {
+    @Id
+    private int id;
     public String getItemName() {
         return itemName;
     }
@@ -17,10 +24,11 @@ public class Item {
         this.price = price;
     }
 
-    public Item(String itemName, int price, int quantity) {
+    public Item(int id,String itemName, int price, int quantity) {
         this.itemName = itemName;
         this.price = price;
         this.quantity = quantity;
+        this.id = id;
     }
     public Item() {
 
@@ -37,4 +45,7 @@ public class Item {
     private String itemName;
     private int price;
     private int quantity;
+    @Transient
+    private int value;
+
 }
