@@ -47,6 +47,7 @@ public void init() {
         when(bussinessService.retrieveData()).thenReturn(new int[]{1, 5});
 
         int result = bussinessApplication.calculateUsingService();
+        int result = bussinessApplication.calculateUsingService();
         assertEquals(6, result);
 
 
