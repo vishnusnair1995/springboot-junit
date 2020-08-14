@@ -1,11 +1,14 @@
 package com.equifax.library.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.equifax.library.model.Book;
 import com.equifax.library.repository.BookRepo;
 @Service
+@Transactional
 public class BookServiceImpl implements BookService {
 
 	@Autowired
