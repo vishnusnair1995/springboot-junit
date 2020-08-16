@@ -12,12 +12,14 @@ package com.equifax.library.model;
 	public class User {
 		
 		@Id
-		//@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 		@GeneratedValue
+		@Column(name = "USER_ID")
 		private int userId;
+		
+		@Column(name = "USER_NAME")
 		private String userName;
 		
-		@Column(name = "role")
+		@Column(name = "ROLE")
 		private String userRole;
 		
 		public int getUserId() {
