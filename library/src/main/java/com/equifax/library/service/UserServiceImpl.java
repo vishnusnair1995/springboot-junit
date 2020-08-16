@@ -1,6 +1,6 @@
 package com.equifax.library.service;
-
-import org.apache.commons.lang3.StringUtils;
+//
+//import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,9 +50,9 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	public String validateUser(UserDTO userDTO) {
-		if(StringUtils.isBlank(userDTO.getUserName())) {
+		if(userDTO.getUserName().isEmpty()) {
 			return "User name cannot be empty";
-		}else if(StringUtils.isBlank(userDTO.getUserRole()))
+		}else if(userDTO.getUserRole().isEmpty())
 		{
 			return "User role cannot be empty";
 		}
