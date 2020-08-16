@@ -1,5 +1,6 @@
 package com.equifax.library.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.equifax.library.model.User;
+import com.equifax.library.dto.UserDTO;
 import com.equifax.library.service.UserService;
+
 
 @RestController
 public class UserController {
@@ -18,18 +20,43 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(method=RequestMethod.POST,value="/addUser/{userId}")
-	public User addUser(@RequestBody User user,@PathVariable(name="userId") int userId) {
+	
+	@RequestMapping(method=RequestMethod.POST,value="/addUser")
+	public String addUser(@RequestBody UserDTO userDTO,@RequestHeader("verifyUser") int userId) {
 		if(userService.authenticateUser(userId)) {
-			return userService.addUser(user);
+			String validationStatus=userService.validateUser(userDTO);
+			if(validationStatus.equalsIgnoreCase("success")) {
+				try {
+						userService.addUser(userDTO);
+						return "User added successfully";
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+					return "Exception Occured while adding the user";
+				}
+				
+			}else {
+				return validationStatus;
+			}
+								
 		}else {
-			return null;
+			return "User does not have privileges to add another user";
+			
 		}
 	}
 	
 	@DeleteMapping("/deleteUser/{id}")
-	public String deleteUser(@PathVariable(name="id")  int userId,@RequestHeader("Verifyuser") int Verifyuser) {
-		return userService.deleteUser(userId,Verifyuser);
+	public String deleteUser(@PathVariable(name="id") int userId,@RequestHeader("Verifyuser") int Verifyuser) {
+		if(userService.authenticateUser(Verifyuser)) {
+			try {
+				String status=userService.deleteUser(userId);
+				return status;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return "Some exception occured";
+			}
+		}else 
+			return "User does not have privileges to delete another user";	
 		
 	}
 	

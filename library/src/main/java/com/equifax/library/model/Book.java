@@ -1,36 +1,29 @@
 package com.equifax.library.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 public class Book {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue
+	@Column(name="BOOK_ID")
+	private int bookId;
+	@Column(name="BOOK_NAME")
 	private String bookName;
-	//@Value("${some.key:Available}")
+	@Column(name="BOOK_STATUS")
 	private String bookStatus;
-	private String userDetails;
-	public Book() {
-		this.bookStatus="Available";
-		this.userDetails="";
+	@Column(name="USER_ID")
+	private int userId;
+	
+	public int getBookId() {
+		return bookId;
 	}
-	public Book(String bookName, String bookStatus, String userDetails) {
-		super();
-		this.bookName = bookName;
-		this.bookStatus = bookStatus;
-		this.userDetails = userDetails;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
 	}
 	public String getBookName() {
 		return bookName;
@@ -44,11 +37,11 @@ public class Book {
 	public void setBookStatus(String bookStatus) {
 		this.bookStatus = bookStatus;
 	}
-	public String getUserDetails() {
-		return userDetails;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUserDetails(String userDetails) {
-		this.userDetails = userDetails;
+	public void setUserDetails(int userId) {
+		this.userId = userId;
 	}
 	
 }
